@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import { useScan } from '../context/ScanContext.jsx';
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+
 // Bot metadata — used during the animated loading phase
 // (must match order in server.js mapBotResult calls)
 export const BOT_DEFS = [
@@ -47,7 +49,7 @@ export function useBotScan() {
 
     // Run real scan against backend
     const runRealScan = async () => {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/scan`, {
+      const response = await fetch(`${backendUrl}/api/scan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url }),
